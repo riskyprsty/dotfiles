@@ -1,0 +1,127 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "fixed-center": true,
+    
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces", "custom/recording", "hyprland/submap", "cpu", "memory", "disk" ],
+    "modules-center": ["mpd"],
+    "modules-right": ["battery", "backlight", "pulseaudio", "network", "clock", "tray"],
+    
+    // Modules configuration
+    "wlr/workspaces": {
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{name}"   
+    },
+    "mpd": {
+        "format": " {title} - {artist}",
+        "format-disconnected": "Disconnected",
+        "format-stopped": "Stopped",
+        "max-length": 50,
+        "on-click": "music",
+        "on-click-right": "alacritty --class floating -e ncmpcpp",
+        "tooltip": false
+    },
+    
+    "tray": {
+        //"icon-size": 11,
+        "spacing": 5
+    },
+    
+    "clock": {
+        "format": " {:%H:%M,%e %b}",
+        "tooltip": false,
+        "today-format": "<b>{}</b>"
+    },
+    
+    "cpu": {
+		"interval": 10,
+		"format": "{}% ",
+		"max-length": 10
+	},
+    
+    "memory": {
+		"interval": 30,
+		"format": "{}% ﬙",
+		"max-length": 10
+	},
+	
+	"disk": {
+		"interval": 30,
+		"format": "{percentage_used}% ",
+		"path": "/"
+	},
+
+    "network": {
+        "interval": "0.1",
+        "format-wifi": "直 {essid}",
+        "format-ethernet": "歷 {ifname}",
+        "format-linked": "歷 {ifname}",
+        "format-disconnected": "轢 Disconected",
+        "family": "ipv4",
+        "on-click": "network_menu",
+        "tooltip": false
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-bluetooth-muted": "婢  MUTE",
+        "format-muted": "婢 MUTE",
+        //"format-source": "{volume}% ",
+        //"format-source-muted": "",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pulsemixer --unmute",
+        "on-click-right": "pulsemixer --mute",
+        "tooltip": false
+    },
+    
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
+    },
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
+    },
+    
+    "hyprland/submap": {
+		"format": "<span color=\"#61c766\"></span>",
+		"max-length": 15,
+		"on-click": "hyprctl dispatch submap reset",
+		"tooltip": false
+	},
+	
+	"custom/recording": {
+		"exec": "recording status",
+		"format": "<span color=\"#BF616A\">{}</span>",
+		"on-click": "recording stop",
+		"restart-interval": 1,
+		"return-type": "json",
+		"tooltip": false
+	}
+}
+

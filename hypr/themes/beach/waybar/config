@@ -1,0 +1,120 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "spacing": 4, // Gaps between modules (4px)
+    "fixed-center": true,
+    
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces"],
+    "modules-center": ["mpd"],
+    "modules-right": ["hyprland/submap", "custom/recording", "pulseaudio", "battery", "backlight", "network", "clock", "tray"],
+    
+    // Modules configuration
+    "wlr/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+        "on-click": "activate",
+        "format": "{icon}",
+			"format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+    },
+    
+    "mpd": {
+        "format": "<span color=\"#2587cc\"></span> {title} - {artist}",
+        "format-disconnected": "Disconnected",
+        "on-click": "music",
+        "max-length": 50,
+        "format-stopped": "Stopped",
+        "on-click-right": "alacritty --class floating -e ncmpcpp",
+        "tooltip": false
+    },
+    
+    "tray": {
+        "spacing": 10
+    },
+    
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "<span color=\"#819400\"></span> {:%H:%M}",
+        "format-alt": "<span color=\"#819400\"></span> {:%Y-%m-%d}",
+        "tooltip": false
+    },
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "<span color=\"#289c93\">{icon}</span> {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
+    },
+    
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "<span color=\"#696ebf\">{icon}</span> {capacity}%",
+        "format-charging": "<span color=\"#696ebf\"></span> {capacity}%",
+        "format-plugged": "<span color=\"#696ebf\"></span> {capacity}%",
+        "format-alt": "<span color=\"#696ebf\">{icon}</span> {time}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
+    },
+  
+    "network": {
+        "format-wifi": "<span color=\"#2587cc\">直</span> {essid}",
+        "format-ethernet": "<span color=\"#2587cc\">歷</span> {ifname}",
+        "format-linked": "<span color=\"#2587cc\">歷</span> {ifname}",
+        "format-disconnected": "轢 Disconected",
+        "family": "ipv4",
+        "on-click": "network_menu",
+        "on-click-right": "nm-connection-editor",
+        "tooltip": false
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "<span color=\"#b08500\">{icon}</span> {volume}%",
+        "format-bluetooth": "<span color=\"#b08500\">{icon} </span> {volume}%",
+        "format-bluetooth-muted": "婢 {icon}",
+        "format-muted": "婢 MUTE",
+        "format-source": "<span color=\"#b08500\">{icon}</span> {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["奄", "奄", "", "", "", ""]
+        },
+        "on-double-click": "pavucontrol",
+        "on-click": "pulsemixer --unmute",
+        "on-click-right": "pulsemixer --mute",
+        "tooltip": false
+    },
+    
+    "hyprland/submap": {
+		"format": "<span color=\"#61c766\"></span>",
+		"max-length": 15,
+		"on-click": "hyprctl dispatch submap reset",
+		"tooltip": false
+	},
+	
+	"custom/recording": {
+		"exec": "recording status",
+		"format": "<span color=\"#BF616A\">{}</span>",
+		"on-click": "recording stop",
+		"restart-interval": 1,
+		"return-type": "json",
+		"tooltip": false
+	}
+}
+

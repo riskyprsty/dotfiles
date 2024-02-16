@@ -1,0 +1,126 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "spacing": 4, // Gaps between modules (4px)
+    "fixed-center": true,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    
+    // Choose the order of the modules
+    "modules-left": [ "clock", "mpd"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["hyprland/submap", "custom/recording", "pulseaudio", "battery", "backlight", "network", "tray"],
+    
+    // Modules configuration
+    // Modules configuration
+	"hyprland/workspaces": {	
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+		"format": "{icon}",
+		"on-click": "activate",
+		"format-icons": {
+			"active": "<span color=\"#F1E1DD\">綠</span>",
+			"default": "<span color=\"#486986\">祿</span>"
+		},
+	"sort-by-number": true
+	},
+	
+    "mpd": {
+        "format": "<span color=\"#F1E1DD\"></span> {title} - {artist}",
+        "format-disconnected": "<span color=\"#F1E1DD\">Disconnected</span>",
+        "on-click": "music",
+        "max-length": 50,
+        "format-stopped": "Stopped",
+        "on-click-right": "alacritty --class floating -e ncmpcpp",
+        "tooltip": false
+    },
+    
+    "tray": {
+        "spacing": 10
+    },
+    
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "<span color=\"#F1E1DD\"></span> {:%H:%M}",
+        "tooltip-format": false,
+        "format-alt": "<span color=\"#F1E1DD\"></span> {:%Y-%m-%d}"
+    },
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "<span color=\"#F1E1DD\">{icon}</span> {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
+    },
+    
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "<span color=\"#F1E1DD\"></span> {capacity}%",
+        "format-plugged": "<span color=\"#F1E1DD\"></span> {capacity}%",
+        "format-alt": "<span color=\"#F1E1DD\">{icon}</span> {time}",
+        "tooltip": false,
+        "format-icons": ["", "", "", "", ""]
+    },
+  
+    "network": {
+		"restart-interval": 1,
+        "format-wifi": "<span color=\"#F1E1DD\">直</span> {essid}",
+        "format-ethernet": "<span color=\"#F1E1DD\">歷</span> {ifname}",
+        "format-linked": "<span color=\"#F1E1DD\">歷</span> {ifname}",
+        "format-disconnected": "<span color=\"#F1E1DD\">轢 Disconected</span>",
+        "family": "ipv4",
+        "on-click": "network_menu",
+        "on-click-right": "nm-connection-editor",
+        "tooltip": false
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "<span color=\"#F1E1DD\">{icon}</span> {volume}%",
+        "format-bluetooth": "<span color=\"#F1E1DD\">{icon}</span> {volume}%",
+        "format-bluetooth-muted": "<span color=\"#F1E1DD\">婢 </span>",
+        "format-muted": "婢 MUTE",
+        "format-source": "<span color=\"#b08500\">{icon}</span> {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["奄", "奄", "", "", "", ""]
+        },
+        "on-double-click": "pavucontrol",
+        "on-click": "pulsemixer --unmute",
+        "on-click-right": "pulsemixer --mute",
+        "tooltip": false
+    },
+    
+    "hyprland/window": {
+		"format": "{}",
+		"max-length": 50,
+		"separate-outputs": true
+	},
+	
+	"hyprland/submap": {
+		"format": "<span color=\"#61c766\"></span>",
+		"max-length": 15,
+		"on-click": "hyprctl dispatch submap reset",
+		"tooltip": false
+	},
+	
+	"custom/recording": {
+		"exec": "recording status",
+		"format": "<span color=\"#BF616A\">{}</span>",
+		"on-click": "recording stop",
+		"restart-interval": 1,
+		"return-type": "json",
+		"tooltip": false
+	}
+}
+

@@ -1,0 +1,90 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "fixed-center": true,
+    "spacing": 6, // Gaps between modules (4px)
+    
+    // Choose the order of the modules
+    "modules-left": ["mpd"],
+    "modules-center": ["network"],
+    "modules-right": ["custom/recording", "hyprland/submap", "backlight", "pulseaudio", "tray"],
+    
+    // Modules configuration
+    "mpd": {
+        "format": " {title} - {artist}",
+        "format-disconnected": "Disconnected",
+        "format-stopped": "Stopped",
+        "max-length": 50,
+        "on-click": "music",
+        "on-click-right": "alacritty --class floating -e ncmpcpp",
+        "tooltip": false
+    },
+    
+    "network": {
+        // "interface": "wlan0", // (Optional) To force the use of this interface,
+        "format-wifi": "歷 {ifname}: {ipaddr}/{cidr}",
+        // "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-ethernet": "{ifname} 歷",
+        // "format-linked": "{ifname} (No IP) ",
+        "format-linked": "{ifname} 歷",
+        "format-disconnected": "轢 Disconected",
+        // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        // "format-alt": "歷 {ifname}",
+        "family": "ipv4",
+        "tooltip": false,
+        "on-click": "network_menu",
+        "on-click-right": "nm-connection-editor"
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-bluetooth-muted": "婢  MUTE",
+        "format-muted": "婢 MUTE",
+        //"format-source": "{volume}% ",
+        //"format-source-muted": "",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-double-click": "pavucontrol",
+        "on-click": "pulsemixer --unmute",
+        "on-click-right": "pulsemixer --mute",
+        "tooltip": false
+    },
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
+    },
+    
+    "hyprland/submap": {
+		"format": "<span color=\"#61c766\"></span>",
+		"max-length": 15,
+		"on-click": "hyprctl dispatch submap reset",
+		"tooltip": false
+	},
+	
+	"custom/recording": {
+		"exec": "recording status",
+		"format": "<span color=\"#BF616A\">{}</span>",
+		"on-click": "recording stop",
+		"restart-interval": 1,
+		"return-type": "json",
+		"tooltip": false
+	}
+}
+

@@ -1,0 +1,134 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "spacing": 4, // Gaps between modules (4px)
+    "fixed-center": true,
+    
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces","mpd"],
+    "modules-center": ["cpu", "memory", "disk"],
+    "modules-right": [ "hyprland/submap", "custom/recording", "battery", "backlight", "network", "pulseaudio", "clock", "tray"],
+    
+    // Modules configuration
+    "wlr/workspaces": {	
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+		"on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+		"format": "{icon}",
+		"on-click": "activate",
+		"format-icons": {
+			"active": "<span color=\"#ba0cd8\">ﰉ</span>",
+		"default": "ﰊ"
+		},
+	"sort-by-number": true
+	},
+	
+    "mpd": {
+        "format": "<span color=\"#b4a1db\"> </span> {title} - {artist}",
+        "format-disconnected": "Disconnected",
+        "format-stopped": "Stopped",
+        "max-length": 50,
+        "on-click": "music",
+        "on-click-right": "alacritty --class floating -e ncmpcpp",
+        "tooltip": false
+    },
+    
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    
+    "cpu": {
+		"interval": 10,
+		"format": "{}% <span color=\"#ffe744\"></span>",
+		"max-length": 10
+	},
+    
+    "memory": {
+		"interval": 30,
+		"format": "{}% <span color=\"#51b4ff\">﬙</span>",
+		"max-length": 10
+	},
+	
+	"disk": {
+		"interval": 30,
+		"format": "{percentage_used}% <span color=\"#ba68c8\"></span>",
+		"path": "/"
+	},
+    
+    "clock": {
+        "format": "{:%H:%M} <span color=\"#75dbe1\"></span>",
+        "tooltip": false,
+        "today-format": "<b>{}</b>",
+        "format-alt": "{:%Y-%m-%d} <span color=\"#75dbe1\"></span>"
+    },
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% <span color=\"#51b4ff\">{icon}</span>",
+        "format-icons": ["", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
+    },
+    
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity} <span color=\"#75dbe1\">{icon}</span>%",
+        "format-charging": "{capacity} <span color=\"#75dbe1\"></span>%",
+        "format-plugged": "{capacity} <span color=\"#75dbe1\"></span>%",
+        "format-alt": "{time} <span color=\"#75dbe1\">{icon}</span>",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
+    },
+    
+    "network": {
+        "format-wifi": "{essid} <span color=\"#b4a1db\">直</span>",
+        "format-ethernet": "{ifname} <span color=\"#b4a1db\">歷</span>",
+        "format-linked": "{ifname} <span color=\"#b4a1db\">歷</span>",
+        "format-disconnected": "Disconected 轢",
+        "family": "ipv4",
+        "tooltip": false,
+        "on-click": "network_menu",
+        "on-click-right": "nm-connection-editor"
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "{volume}% <span color=\"#e06a70\">{icon}</span>",
+        "format-bluetooth": "{volume}% <span color=\"#e06a70\">{icon} </span>",
+        "format-bluetooth-muted": "MUTE 婢 ",
+        "format-muted": "MUTE 婢",
+        "format-source": "<span color=\"#e06a70\"></span>",
+        "format-source-muted": "",            
+        "format-icons": {
+			"default": ["", "", "", ""]
+        },
+        "on-double-click": "pavucontrol",
+        "on-click": "pulsemixer --unmute",
+        "on-click-right": "pulsemixer --mute",
+        "tooltip": false
+    },
+    
+    "hyprland/submap": {
+		"format": "<span color=\"#61c766\"></span>",
+		"max-length": 15,
+		"on-click": "hyprctl dispatch submap reset",
+		"tooltip": false
+	},
+	
+	"custom/recording": {
+		"exec": "recording status",
+		"format": "<span color=\"#BF616A\">{}</span>",
+		"on-click": "recording stop",
+		"restart-interval": 1,
+		"return-type": "json",
+		"tooltip": false
+	}
+}
+

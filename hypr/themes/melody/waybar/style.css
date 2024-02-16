@@ -1,0 +1,46 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Iosevka, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    border-radius: 30px;
+    min-height: 0;
+    margin: 1px 3px;
+}
+
+#waybar {
+    background-color: #282C2F
+    ;
+    color: #eeeeee;
+    transition-property: background-color;
+    transition-duration: .5s;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: "Cantarell", "Font Awesome 5 Pro";
+    /*border: 1px solid rgba(100, 114, 125, 0.5);*/
+}
+
+/* Module */
+#clock,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray,
+#mpd,
+#disk,
+#battery,
+#backlight,
+#custom-recording,
+#workspaces {
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    /*background-color: #1c242c;*/
+    margin: 2px 3px;
+}
+
+#pulseaudio.muted {
+    color: #d87e97;
+}
+
+#mpd.stopped {
+    color: #d87e97;
+}
